@@ -6,7 +6,10 @@ const TOKEN_ABI = {
   totalSupply: "function totalSupply() view returns (uint256)",
 }
 
-async function fetchBeefyTVL(api) {
+// Aerodrome issues AERO rewards to liquidity pool providers who stake their liquidity pool tokens on the Aerodrome Platform.
+// KlimaDAO’s Auto Compounder automates Aerodrome staking positions, compounding the AERO every 24 hours.
+// 1% of the accrued rewards is used to burn existing KLIMA tokens and retire carbon credits owned by KlimaDAO.
+async function fetchKlimaDAOAutocompounderTVL(api) {
   const VAULTS = Object.values({
     'aerodrome-weth-klima': '0x1e96a15afb820d5EF58782fDf0f5A5DF027b3e38',
     'aerodrome-usdc-klima': '0x177ec2e92ed22c1efa964c2b46645172b06f3fe5',
@@ -32,7 +35,7 @@ module.exports = {
     staking: staking("0x25d28a24Ceb6F81015bB0b2007D795ACAc411b4d", "0x4e78011ce80ee02d2c3e649fb657e45898257815"),
   },
   base: {
-    pool2: fetchBeefyTVL
+    tvl: fetchKlimaDAOAutocompounderTVL
   },
   hallmarks: [
     [1709828986, "BCT administrative control transferred to KlimaDAO"],
